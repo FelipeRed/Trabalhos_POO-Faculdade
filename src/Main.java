@@ -14,6 +14,7 @@ public class Main {
         Proprietario p = casa1.getProprietario(); //pega a referencia do objeto proprietário da casa
         System.out.println(p.toString()); //imprime o proprietário
         p.setNome("Ana Luiza"); //altera o nome do proprietário
+        p.setSobrenome("Azul"); // altera o sobrenome do proprietário
 
         p = carro1.getProprietario(); //pega a referencia do proprietário do carro (que é para ser o mesmo da casa)
         System.out.println(p.toString()); //imprime o proprietário para ver se a alteração do nome aconteceu em nas duas classes
