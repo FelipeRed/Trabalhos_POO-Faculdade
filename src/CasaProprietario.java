@@ -1,8 +1,8 @@
-import Classes.*;
+import CasaProp.*;
 
 import java.time.LocalDate;
 
-public class Main {
+public class CasaProprietario {
     public static void main(String[] args) {
         LocalDate data_nasc = LocalDate.of(1999, 9, 5);
 

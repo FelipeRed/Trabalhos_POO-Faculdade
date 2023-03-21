@@ -1,6 +1,4 @@
-package Classes;
-
-import Classes.Proprietario;
+package CasaProp;
 
 public class Carro {
     private String marca;

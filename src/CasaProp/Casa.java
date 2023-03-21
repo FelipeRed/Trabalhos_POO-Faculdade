@@ -1,4 +1,4 @@
-package Classes;
+package CasaProp;
 
 public class Casa {
     private int area;

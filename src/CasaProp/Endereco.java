@@ -1,4 +1,4 @@
-package Classes;
+package CasaProp;
 
 public class Endereco {
     private String nome_rua;

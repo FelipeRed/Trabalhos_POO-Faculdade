@@ -1,4 +1,4 @@
-package Classes;
+package CasaProp;
 
 import java.time.LocalDate;
 public class Proprietario {
