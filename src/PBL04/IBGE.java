@@ -6,7 +6,7 @@ import java.util.Set;
 public class IBGE {
     public static void main(String args[])
     {
-        //realizará a criação dos objetos da classe Municipio
+        //realizará a criação dos objetos da classe Municipio (parâmetros: população, area)
         Municipio curitiba = new Municipio(2400, 400);
         Municipio guarapuava = new Municipio( 200, 100);
         Municipio londrina = new Municipio( 800, 300);
@@ -32,7 +32,7 @@ public class IBGE {
         ba_municipios.add(itabuna);
         Estado bahia = new Estado(ba_municipios);
 
-        //cria se o objeto vazio (sem parâmetros e seu construtor ira criar um conjunto vazio no seu atributo estados)
+        //cria se o objeto vazio (sem parâmetros e seu construtor irá criar um conjunto vazio no seu atributo estados)
         Pais brasil = new Pais();
         //adiciona-se os estados no conjunto do atribuuto do Brasil
         brasil.addEstados(parana);

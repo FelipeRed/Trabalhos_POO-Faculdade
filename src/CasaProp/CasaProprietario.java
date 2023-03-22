@@ -1,4 +1,4 @@
-import CasaProp.*;
+package CasaProp;
 
 import java.time.LocalDate;
 
