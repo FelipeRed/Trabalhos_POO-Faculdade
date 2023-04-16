@@ -1,7 +1,5 @@
 package memoriaCache;
-import Exercicios.Exercicio5;
-import Exercicios.Exercicio6;
-
+import memoriaCache.Exercicios.*;
 import java.util.Scanner;
 
 public class Main {

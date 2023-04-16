@@ -11,7 +11,7 @@ public class LinhaDeMemoria {
 
         Random rdn = new Random(); // Classe utilizada para capturar um valor rancômico
         this.endereco = linhas[n_linha]; // Atributo endereço receberá o array linhas na posição do parâmetro n_linhas
-        this.dado = rdn.nextInt(100,250); // Atributo valor receberá um número aleatório de 100 a 200
+        this.dado = rdn.nextInt(200); // Atributo valor receberá um número aleatório de 0 a 200
     }
     public String getEndereco() {
         return endereco;

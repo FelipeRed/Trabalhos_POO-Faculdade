@@ -15,7 +15,9 @@ public class MemoriaPrincipal {
             memoriaPrincipal.add(linha);
         }
     }
-
+    public ArrayList<LinhaDeMemoria> getMemoriaPrincipal() {
+        return memoriaPrincipal;
+    }
     public void printarMemoria() {
         System.out.println();
         System.out.println("MEMÓRIAL PRINCIPAL");
