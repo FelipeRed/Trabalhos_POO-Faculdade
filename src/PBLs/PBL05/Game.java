@@ -40,6 +40,9 @@ public class Game {
                     boolean sucesso = imprimirDadosTodosJogadores();
                     mensagem(sucesso ? "" : "\nNão há Jogadores a serem impressos.");
                 }
+                default -> {
+                    break;
+                }
             }
         }
     }
@@ -74,11 +77,13 @@ public class Game {
         //irá criar um objeto do tipo Principiante e adicionar a coleção de jogadores
         Principiante j = new Principiante(nome, 0, 0);
         jogadores.add(j);
-    }public static void criarProfissional(String nome) {
+    }
+    public static void criarProfissional(String nome) {
         //irá criar um objeto do tipo Profissional e adicionar a coleção de jogadores
         Profissional j = new Profissional(nome, 0, 0);
         jogadores.add(j);
-    }public static void criarSenior(String nome) {
+    }
+    public static void criarSenior(String nome) {
         //irá criar um objeto do tipo Senior e adicionar a coleção de jogadores
         Senior j = new Senior(nome, 0, 0, 0);
         jogadores.add(j);
@@ -129,7 +134,7 @@ public class Game {
         imprimirJogadoresDisponiveis();
         Jogador j = encontrarJogador();
         if (j == null) {
-            return false; //se o jogador não existir o método retorna false
+            return false; //se o jogador buscado não existir o método retorna false
         } else {
             System.out.print("Insira quantos pontos ele deve ganhar: ");
             int p = scanner.nextInt();
@@ -140,17 +145,18 @@ public class Game {
                     jogador.perder(p); //chamo o método perder caso a ação desejada seja 2 (Perder)
                 }
             } else if (j instanceof Profissional jogador) {
-                if (acao == 1) {
-                    jogador.ganhar(p);
+                if (j instanceof Senior jog) {
+                    if (acao == 1) {
+                        jog.ganhar(p);
+                    } else {
+                        jog.perder(p);
+                    }
                 } else {
-                    jogador.perder(p);
-                }
-            } else if (j instanceof Senior jogador) {
-                //não entendi a causa do aviso: Condition 'j instanceof Senior jogador' is always 'false'
-                if (acao == 1) {
-                    jogador.ganhar(p);
-                } else {
-                    jogador.perder(p);
+                    if (acao == 1) {
+                        jogador.ganhar(p);
+                    } else {
+                        jogador.perder(p);
+                    }
                 }
             }
         }
@@ -171,14 +177,7 @@ public class Game {
             return false; //se a coleção de Jogadores estiver vazia o retorno é false
         }
         for (Jogador j : jogadores) {
-            if (j instanceof Principiante jogador) { //verifico o tipo de jogador e já faço o casting no próprio if
-                jogador.imprimir();
-            } else if (j instanceof Profissional jogador) {
-                jogador.imprimir();
-            } else if (j instanceof Senior jogador) {
-                //não entendi a causa do aviso: Condition 'j instanceof Senior jogador' is always 'false'
-                jogador.imprimir();
-            }
+            j.imprimir();
         }
         return true;
     }
