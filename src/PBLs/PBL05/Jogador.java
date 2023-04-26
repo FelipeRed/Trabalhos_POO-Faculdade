@@ -1,17 +1,16 @@
 package PBLs.PBL05;
 
-public class Jogador {
+public abstract class Jogador {
     private String nome;
-    protected int score;
+    private int score;
 
     public Jogador(String nome, int score) {
         this.nome = nome;
         this.score = score;
     }
-    public void imprimir() {
-        System.out.println("\nNome: " + nome);
-        System.out.println("Score: " + score);
-    }
+    public abstract void imprimir();
+    public abstract void ganhar(int p);
+    public abstract void perder(int p);
     public int getScore() {
         return score;
     }
