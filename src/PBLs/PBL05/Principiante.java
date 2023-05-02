@@ -1,7 +1,5 @@
 package PBLs.PBL05;
 
-import PBLs.PBL05.Jogador;
-
 public class Principiante extends Jogador {
     private double bonus;
 

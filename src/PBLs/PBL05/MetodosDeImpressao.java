@@ -20,11 +20,17 @@ public class MetodosDeImpressao {
         if (j == null) {
             return false; //se o jogador não existir o retorno é false
         } else {
-            j.imprimir();
+            if (j instanceof Principiante jogador)
+                jogador.imprimir();
+            else if (j instanceof Profissional jogador && !(j instanceof Senior))
+                jogador.imprimir();
+            else if (j instanceof Senior jogador)
+                jogador.imprimir();
         }
         return true;
     }
-    public static boolean imprimirDadosTodosJogadores(HashSet<Jogador> all_jogadores) { //imprimirá todos os jogadores (por tipo) e os seus atributos
+    public static boolean imprimirDadosTodosJogadores(HashSet<Jogador> all_jogadores) {
+        //método que imprimirá todos os jogadores (por tipo) e os seus atributos
         if (all_jogadores.isEmpty()) {
             return false; //se a coleção de Jogadores estiver vazia o retorno é false
         }
@@ -41,9 +47,9 @@ public class MetodosDeImpressao {
                 //2a linha: o score de cada um dos jogadores
                 //3a linha: o bonus de cada um dos jogadores
                 for (int i = 0; i < 3; i++) { //a variável i indicará qual a linha da tabela está sendo impressa
-                    if (i == 0) System.out.print("Nome  |");
-                    if (i == 1) System.out.print("\nScore |");
-                    if (i == 2) System.out.print("\nBonus |");
+                    if (i == 0) System.out.print("Nome    |");
+                    if (i == 1) System.out.print("\nScore   |");
+                    if (i == 2) System.out.print("\nBonus   |");
                     for (Jogador j : all_jogadores) {
                         if (j instanceof Principiante jogador) {
                             if (i == 0) System.out.print(" " + jogador.getNome() + " |");
@@ -61,7 +67,7 @@ public class MetodosDeImpressao {
                     if (i == 1) System.out.print("\nScore   |");
                     if (i == 2) System.out.print("\nCapital |");
                     for (Jogador j : all_jogadores) {
-                        if (j instanceof Profissional jogador) {
+                        if (j instanceof Profissional jogador && !(j instanceof Senior)) {
                             if (i == 0) System.out.print(" " + jogador.getNome() + " |");
                             if (i == 1) imprimir_Score_Centralizado(jogador);
                             if (i == 2) imprimir_Capital_Centralizado(jogador);
@@ -73,9 +79,9 @@ public class MetodosDeImpressao {
             case "SENIORS" -> {
                 System.out.println("SENIORS");
                 for (int i = 0; i < 3; i++) {
-                    if (i == 0) System.out.print("Nome   |");
-                    if (i == 1) System.out.print("\nScore  |");
-                    if (i == 2) System.out.print("\nPrêmio |");
+                    if (i == 0) System.out.print("Nome    |");
+                    if (i == 1) System.out.print("\nScore   |");
+                    if (i == 2) System.out.print("\nPrêmio  |");
                     for (Jogador j : all_jogadores) {
                         if (j instanceof Senior jogador) {
                             if (i == 0) System.out.print(" " + jogador.getNome() + " |");

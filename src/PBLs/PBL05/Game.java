@@ -3,7 +3,6 @@ package PBLs.PBL05;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
-import static PBLs.PBL05.MetodosDeImpressao.*;
 
 public class Game {
     private static HashSet<Jogador> all_jogadores = new HashSet<>();
@@ -15,15 +14,15 @@ public class Game {
             System.out.println();
             switch (escolha) {
                 case 1 -> { //criar Principiante
-                    criarPrincipiante(pedir_e_checar_Nome());
+                    criarPrincipiante(pedir_e_checar_Nome(), false);
                     mensagem("Jogador criado com sucesso.");
                 }
                 case 2 -> { //criar Profissional
-                    criarProfissional(pedir_e_checar_Nome());
+                    criarProfissional(pedir_e_checar_Nome(), false);
                     mensagem("Jogador criado com sucesso.");
                 }
                 case 3 -> { //criar Senior
-                    criarSenior(pedir_e_checar_Nome());
+                    criarSenior(pedir_e_checar_Nome(), false);
                     mensagem("Jogador criado com sucesso.");
                 }
                 case 4 -> { //fazer um jogador perder pontos
@@ -35,11 +34,11 @@ public class Game {
                     mensagem(sucesso ? "\nOperação realizada com sucesso." : "\nJogador não encontrado.");
                 }
                 case 6 -> { //imprimir os dados de um jogador
-                    boolean sucesso = imprimirJogador(all_jogadores);
+                    boolean sucesso = MetodosDeImpressao.imprimirJogador(all_jogadores);
                     mensagem(sucesso ? "" : "\nJogador não encontrado.");
                 }
                 case 7 -> { //imprimir os dados de todos os jogadores
-                    boolean sucesso = imprimirDadosTodosJogadores(all_jogadores);
+                    boolean sucesso = MetodosDeImpressao.imprimirDadosTodosJogadores(all_jogadores);
                     mensagem(sucesso ? "" : "\nNão há Jogadores a serem impressos.");
                 }
                 default -> {}
@@ -51,11 +50,11 @@ public class Game {
                           "Nicolas P.", "Vittorio C."};
         for (int i = 0; i < nomes.length; i++) {
             if (i < 3) {
-                criarPrincipiante(nomes[i]);
+                criarPrincipiante(nomes[i], true);
             } else if (i < 6) {
-                criarProfissional(nomes[i]);
+                criarProfissional(nomes[i], true);
             } else {
-                criarSenior(nomes[i]);
+                criarSenior(nomes[i], true);
             }
         }
     }
@@ -74,20 +73,44 @@ public class Game {
         System.out.print("Que ação gostaria de executar: ");
         return scanner.nextInt();
     }
-    public static void criarPrincipiante(String nome) { //cria um objeto Principiante e já adiciona a coleção jogadores
-        Random rdn = new Random();
-        Principiante j = new Principiante(nome, rdn.nextInt(100), rdn.nextDouble(1000));
-        all_jogadores.add(j);
+    public static void criarPrincipiante(String nome, boolean dados_randomicos) {
+        //cria um objeto Principiante e adiciona a coleção jogadores
+        if (dados_randomicos) {
+            Random rdn = new Random();
+            int score = rdn.nextInt(100);
+            double bonus = 0.1 * score;
+            Principiante j = new Principiante(nome, score, bonus);
+            all_jogadores.add(j);
+        } else {
+            Principiante j = new Principiante(nome, 0, 0);
+            all_jogadores.add(j);
+        }
     }
-    public static void criarProfissional(String nome) { //cria um objeto Profissional e já adiciona a coleção jogadores
-        Random rdn = new Random();
-        Profissional j = new Profissional(nome, rdn.nextInt(100), rdn.nextDouble(1000));
-        all_jogadores.add(j);
+    public static void criarProfissional(String nome, boolean dados_randomicos) {
+        //cria um objeto Profissional e adiciona a coleção jogadores
+        if (dados_randomicos) {
+            Random rdn = new Random();
+            int score = rdn.nextInt(100);
+            double capital = score * 4;
+            Profissional j = new Profissional(nome, score, capital);
+            all_jogadores.add(j);
+        } else {
+            Profissional j = new Profissional(nome, 0, 0);
+            all_jogadores.add(j);
+        }
     }
-    public static void criarSenior(String nome) { //cria um objeto Senior e já adiciona a coleção jogadores
-        Random rdn = new Random();
-        Senior j = new Senior(nome, rdn.nextInt(100), rdn.nextDouble(1000), rdn.nextDouble(1000));
-        all_jogadores.add(j);
+    public static void criarSenior(String nome, boolean dados_randomicos) {
+        //cria um objeto Senior e adiciona a coleção jogadores
+        if (dados_randomicos) {
+            Random rdn = new Random();
+            int score = rdn.nextInt(100);
+            double capital = score * 4;
+            Senior j = new Senior(nome, score, capital, 10);
+            all_jogadores.add(j);
+        } else {
+            Senior j = new Senior(nome, 0, 0, 10);
+            all_jogadores.add(j);
+        }
     }
     public static String pedirNome() { //irá pedir um nome e retornar o input do usuário
         Scanner scanner = new Scanner(System.in);
@@ -136,17 +159,34 @@ public class Game {
     }
     public static boolean jogador_1Ganhar_2Perder(int acao) { //tipos de acao: 1-Ganhar; 2-Perder;
         Scanner scanner = new Scanner(System.in);
-        imprimirJogadoresDisponiveis(all_jogadores);
+        MetodosDeImpressao.imprimirJogadoresDisponiveis(all_jogadores);
         Jogador j = encontrarJogador();
         if (j == null) {
             return false; //se o jogador buscado não existir o método retorna false
         } else {
-            System.out.print("Insira quantos pontos ele deve ganhar: ");
-            int p = scanner.nextInt();
-            if (acao == 1) {
-                j.ganhar(p); //chama o método ganhar caso o parâmetro da função receba 1 (Ganhar)
-            } else {
-                j.perder(p); //chama o método perder caso o parâmetro da função receba 1 (Perder)
+            String s = (acao == 1) ? "ganhar" : "perder";
+            System.out.print("Insira quantos pontos ele deve " + s + ": ");
+            int pontos = scanner.nextInt();
+            if (j instanceof Principiante jogador) {
+                if (acao == 1) {
+                    jogador.ganhar(pontos); //chama o método ganhar caso o parâmetro da função receba 1 (Ganhar)
+                } else {
+                    jogador.perder(pontos); //chama o método perder caso o parâmetro da função receba 1 (Perder)
+                }
+            }
+            if (j instanceof Profissional jogador && !(j instanceof Senior)) {
+                if (acao == 1) {
+                    jogador.ganhar(pontos); //chama o método ganhar caso o parâmetro da função receba 1 (Ganhar)
+                } else {
+                    jogador.perder(pontos); //chama o método perder caso o parâmetro da função receba 1 (Perder)
+                }
+            }
+            if (j instanceof Senior jogador) {
+                if (acao == 1) {
+                    jogador.ganhar(pontos); //chama o método ganhar caso o parâmetro da função receba 1 (Ganhar)
+                } else {
+                    jogador.perder(pontos); //chama o método perder caso o parâmetro da função receba 1 (Perder)
+                }
             }
         }
         return true;

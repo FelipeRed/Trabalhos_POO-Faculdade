@@ -1,7 +1,5 @@
 package PBLs.PBL05;
 
-import PBLs.PBL05.Jogador;
-
 public class Profissional extends Jogador {
     private double capital;
     public Profissional(String nome, int score, double capital) {
